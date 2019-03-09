@@ -1,0 +1,59 @@
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" routerLink="home" (click)="onNavBarClick()">
+      <i class="fas fa-home"></i> 
+    </a>
+
+    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic"
+      (click)="onNavBarClick()" #navBarBurger>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="navbarBasic" class="navbar-menu" #navBarMenu>
+    <div class="navbar-start">
+
+      <a class="navbar-item" routerLink="avisos" (click)="onNavBarClick()">
+        Avisos
+      </a>
+
+      <a class="navbar-item" routerLink="portaria" (click)="onNavBarClick()">
+        Portaria
+      </a>
+
+      <a class="navbar-item" routerLink="documentos" (click)="onNavBarClick()">
+        Documentos
+      </a>
+
+      <a class="navbar-item" routerLink="visitas" (click)="onNavBarClick()">
+        Lista de Visitas
+      </a>
+
+      <a class="navbar-item" routerLink="negocios" (click)="onNavBarClick()">
+        Negócios
+      </a>
+
+      <hr class="navbar-divider">
+      <a class="navbar-item" routerLink="ouvidoria" (click)="onNavBarClick()">
+        Ouvidoria
+      </a>   
+      
+      <hr class="navbar-divider">
+      <a class="navbar-item" routerLink="sobre" (click)="onNavBarClick()">
+        Sobre
+      </a>       
+    </div>
+    <hr>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons">
+          <a class="button is-info is-medium" routerLink="login" (click)="onNavBarClick()">
+            Entrar
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

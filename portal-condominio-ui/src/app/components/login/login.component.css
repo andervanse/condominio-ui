@@ -1,0 +1,18 @@
+.notification.is-danger {
+    background-color: #ff6666;
+    color: #fff;
+    font-size: 14px;
+ }
+ 
+ .ng-valid[required], .ng-valid.required  {
+    border-left: 5px solid #42A948; /* green */
+ }
+    
+ .ng-invalid:not(form):not(.ng-pristine)  {
+    border-left: 5px solid #a94442; /* red */
+ }
+
+
+ .is-green {
+   background-color: rgba(73, 134, 65, 0.596)
+ }

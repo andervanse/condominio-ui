@@ -1,0 +1,42 @@
+/* You can add global styles to this file, and also import other style files */
+
+.main-container {
+    min-height: 100vh; /* will cover the 100% of viewport */
+    overflow: hidden;
+    display: block;
+    position: relative;
+    padding-bottom: 100px; /* height of your footer */
+}
+
+.footer {
+   padding: 1rem 0.5rem 1rem 1rem;
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+}
+
+.navbar {
+    padding: 0.8rem 0rem 0rem 0rem;
+    background-color:  rgba(73, 134, 65, 0.596);
+    font-size: 18px;
+}
+
+.navbar-item {
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 1400px) {
+    .title {
+       font-size: 22px;
+    }
+
+    .hero-body {
+        padding: 1.5rem 0.5rem;
+    }
+ }
+
+ @media only screen and (min-width: 1087px) {
+    .navbar-item {
+        color: white;
+    }
+}
