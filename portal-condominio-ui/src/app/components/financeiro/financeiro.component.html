@@ -1,0 +1,63 @@
+<section class="hero">
+  <div class="hero-body">
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical is-3"></div>
+      <div class="tile is-vertical is-6">
+        <div class="tile">
+          <div class="tile is-parent is-vertical">
+            <article class="tile is-child notification">
+              <p class="title has-text-centered">Situação financeira</p>
+
+              <div [hidden]="!chart">
+                <canvas id="canvas">{{ chart }}</canvas>
+              </div>
+
+            </article>
+
+            <article class="tile is-child notification">
+              <p class="title has-text-centered">Receitas</p>
+              <table class="table is-borderer is-striped">
+                <thead>
+                  <tr>
+                    <td>Desc.</td>
+                    <td>Data</td>
+                    <td class="td-right">Valor</td>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let item of receitas">
+                    <td>{{ item.desc }}</td>
+                    <td>{{ item.data | date:'dd/MM/yyyy' }}</td>
+                    <td class="td-right">{{ item.valor }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </article>
+            <article class="tile is-child notification">
+              <p class="title has-text-centered">Despesas</p>
+              <table class="table is-borderer is-striped">
+                <thead>
+                  <tr>
+                    <td>Desc.</td>
+                    <td>Data</td>
+                    <td class="td-right">Valor</td>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let item of despesas">
+                    <td>{{ item.desc }}</td>
+                    <td>{{ item.data | date:'dd/MM/yyyy' }}</td>
+                    <td class="td-right">{{ item.valor | number:'3.2-2'}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

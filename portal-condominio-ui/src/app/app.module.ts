@@ -18,6 +18,7 @@ import { OuvidoriaComponent } from './components/ouvidoria/ouvidoria.component';
 import { SobreComponent } from './components/sobre/sobre.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { FinanceiroComponent } from './components/financeiro/financeiro.component';
 
 
 const appRoutes: Routes = [
@@ -29,6 +30,7 @@ const appRoutes: Routes = [
   { path: 'portaria', component: PortariaComponent },  
   { path: 'visitas', component: VisitasComponent },  
   { path: 'negocios', component: NegociosComponent },  
+  { path: 'financeiro', component: FinanceiroComponent },
   { path: 'ouvidoria', component: OuvidoriaComponent },  
   { path: 'sobre', component: SobreComponent },    
   { path: '**', component: Page404Component }
@@ -47,7 +49,8 @@ const appRoutes: Routes = [
     Page404Component,
     PortariaComponent,
     OuvidoriaComponent,
-    SobreComponent
+    SobreComponent,
+    FinanceiroComponent
   ],
   imports: [
     BrowserModule,
