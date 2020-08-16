@@ -56,8 +56,11 @@
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-info is-medium" routerLink="login" (click)="onNavBarClick()">
-            Entrar
+          <a *ngIf="!isAuthenticated()" routerLink="login" class="button is-info" (click)="onNavBarClick()">
+            Log in
+          </a>
+          <a *ngIf="isAuthenticated()" routerLink="logoff" class="button is-info" (click)="onNavBarClick()">
+            &nbsp;&nbsp; Sair &nbsp;&nbsp;
           </a>
         </div>
       </div>

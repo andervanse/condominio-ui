@@ -1,43 +1,35 @@
 <section class="hero">
   <div class="hero-body">
-    <div class="tile is-ancestor">
-
-      <div class="tile is-vertical is-4 is-two-fifths">
+    <div class="container">
+      <div *ngIf="loginFailed" class="notification is-danger" (click)="onNotificationClick(loginForm)">
+        <button class="delete"></button>
+        <p class="title is-5 has-text-centered">
+          {{ errorMessage }}
+        </p>
       </div>
 
-      <div class="tile is-vertical is-8 is-two-fifths is-info">
-        <div class="tile">
-          <div class="tile is-parent is-vertical">
+      <p class="notification title is-5 has-text-centered has-text-white is-green">
+        Login
+      </p>
 
-            <section class="tile is-child is-4 is-offset-4">
-              <p class="notification title is-5 has-text-centered has-text-white is-green">
-                Login
-              </p>
-
-              <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
-                <div class="field">
-                  <label for="login">Login</label>
-                  <div class="control" id="login">
-                    <input class="input" type="text" placeholder="Login" name="login" ngModel required minlength="8"
-                      maxlength="30">
-                  </div>
-                </div>
-                <div class="field">
-                  <label for="senha">Senha</label>
-                  <div class="control" id="senha">
-                    <input class="input" type="password" placeholder="Senha" name="password" ngModel required
-                      minlength="6">
-                  </div>
-                </div>
-                <br>
-                <button type="submit" class="button is-info is-pulled-right is-medium"
-                  [disabled]="!loginForm.form.valid" #btnLogin>Login</button>
-              </form>
-            </section>
-
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
+        <div class="field">
+          <label for="login">Login</label>
+          <div class="control" id="login">
+            <input class="input" type="text" placeholder="Login" name="login" ngModel required minlength="8"
+              maxlength="30">
           </div>
         </div>
-      </div>
-    </div>
+        <div class="field">
+          <label for="senha">Senha</label>
+          <div class="control" id="senha">
+            <input class="input" type="password" placeholder="Senha" name="password" ngModel required minlength="6">
+          </div>
+        </div>
+        <button type="submit" class="button is-info is-pulled-right" [disabled]="!loginForm.form.valid"
+          #btnLogin>Login</button>
+      </form>
+
   </div>
+</div>
 </section>

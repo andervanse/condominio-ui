@@ -1,0 +1,85 @@
+<section class="hero">
+  <div class="hero-body">
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical is-3">
+      </div>
+    
+      <div class="tile is-vertical is-6">
+
+        <div class="tile is-parent is-vertical">
+          <div class="tile is-child box">
+
+            <div *ngIf="mensagemErro !== ''" class="notification is-danger" (click)="onNotificationClick()">
+              <button class="delete"></button>
+              <h4 class="title is-4 has-text-centered">
+                {{ mensagemErro }}
+              </h4>
+            </div>
+
+            <p class="title">Novo Aviso</p>
+            <form #avisoForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+              <input type="hidden" name="id" ngModel>
+              <input type="hidden" name="usuarioId" ngModel>
+
+              <div class="field">
+                <div class="control is-6">
+                  <label for="ordem">Ordem</label>
+                  <input class="input" type="number" placeholder="Ordem" name="ordem" ngModel required min="1" max="99"
+                    maxlength="3">
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="obs">Título</label>
+                <div class="control" id="titulo">
+                  <input class="input" type="text" placeholder="Título" name="titulo" ngModel required
+                    maxlength="100" />
+                </div>
+              </div>
+
+              <div class="field">
+                <label for="obs">Texto</label>
+                <div class="control" id="texto">
+                  <textarea class="textarea" type="text" rows="2" placeholder="Texto" name="texto" ngModel required
+                    minlength="5" maxlength="3000"></textarea>
+                </div>
+              </div>
+
+              <br>
+              <div *ngIf="imagemUpload">
+                <div class="fileinputs" id="file-upload">
+                  <div class="tile is-child box">
+                    <figure class="is-256x256 has-text-centered">
+                      <img [src]="imagemUpload" />
+                    </figure>
+                  </div>
+                </div>
+              </div>
+              <br>
+              <div class="is-mobile" *ngIf="!loading">
+                <div class="fileinputs" id="file-upload">
+                  <input type="file" class="file" accept="image/*" (change)="imageUpload($event)" />
+                  <figure class="image is-32x32">
+                    <img src="../../assets/icons/icon-upload-32x32.png" />
+                  </figure>
+                </div>
+              </div>
+              <div *ngIf="aviso?.urlImagens?.length > 0" class="is-pulled-right">
+                <a type="button" class="button is-danger fas fa-times" (click)="apagarImagem()"></a>
+              </div>
+
+              <br>
+              <hr>
+              <div class="is-pulled-right">
+                <a type="button" class="button is-danger" [routerLink]="['../../../home']">Voltar</a>
+                &nbsp;
+                <button type="submit" class="button is-info" #btnSalvar
+                  [disabled]="!avisoForm.form.valid">Salvar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

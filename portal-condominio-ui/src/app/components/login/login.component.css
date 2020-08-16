@@ -1,3 +1,17 @@
+
+.hero-body {
+   padding: 1rem 0rem;
+}
+
+div.container {
+   padding: 1rem 1rem 3.6rem 1rem;
+   width: 24%;
+   border-radius: 5px;
+   background-color: #fff;
+   box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+   color: #4a4a4a;      
+}
+
 .notification.is-danger {
     background-color: #ff6666;
     color: #fff;
@@ -12,7 +26,8 @@
     border-left: 5px solid #a94442; /* red */
  }
 
-
- .is-green {
-   background-color: rgba(73, 134, 65, 0.596)
- }
+ @media only screen and (max-width: 1020px) {
+   div.container {
+      width: 80%;      
+   }
+}

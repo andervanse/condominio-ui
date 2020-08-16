@@ -1,0 +1,69 @@
+<div class="tile is-ancestor">
+
+  <div class="tile is-vertical is-3">
+  </div>
+
+  <div class="tile is-vertical is-6">
+
+    <div class="tile is-parent is-vertical">
+      <nav *ngIf="isAdmin()" class="level level-left">
+          <a class="button is-primary" [routerLink]="['../avisos', 'editar', 0]">Novo</a>
+      </nav>
+      <br>
+      <div class="tile is-child box" *ngFor="let aviso of avisos">
+        <br>
+        <article class="media">
+          <div class="media-content">
+            <div class="content">
+              <div class="img-post">
+                <figure class="is-4by3" *ngIf="aviso.urlImagem">
+                  <img [src]="aviso.urlImagem" />
+                </figure>
+              </div>
+              <br>
+              <span class="tag is-dark">{{ aviso.dataCriacao | date:'dd/MM/yyyy' }}</span>
+              <p class="title">
+                {{ aviso.titulo }}
+              </p>
+              <p class="subtitle">
+                {{ aviso.texto }}
+              </p>
+            </div>
+            <hr>
+            <nav *ngIf="isAdmin()" class="level level-left">
+              <br>
+              <a class="button is-info" [routerLink]="['../avisos', 'editar', aviso.id]">Editar</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <a class="button is-danger" (click)="onToggleModal(aviso.id)">Excluir</a>
+            </nav>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="isAdmin()" class="modal" #dialogModal>
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head is-blue">
+      <p class="modal-card-title">
+      </p>
+      <button class="delete" aria-label="close" (click)="onToggleModal(undefined)"></button>
+    </header>
+
+    <section class="modal-card-body">
+      <p class="title is-5">
+        Deseja excluir este item?
+      </p>
+    </section>
+
+    <footer class="modal-card-foot">
+      <div class="is-pulled-right">
+        <a class="button is-info" (click)="onExcluirClick()">Sim</a>
+        <a class="button is-danger" (click)="onToggleModal(undefined)">Não</a>
+      </div>
+    </footer>
+  </div>
+</div>

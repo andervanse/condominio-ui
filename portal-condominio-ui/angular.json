@@ -24,7 +24,7 @@
               "src/manifest.json"
             ],
             "styles": [
-              "node_modules/bulma-start/css/main.css",
+              "node_modules/bulma/css/bulma.min.css",
               "src/styles.css"
             ],
             "scripts": []

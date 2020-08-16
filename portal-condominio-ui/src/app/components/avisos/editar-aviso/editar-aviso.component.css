@@ -1,0 +1,11 @@
+
+input.file {
+    height: 70px;
+    max-width: 100%;
+    position: absolute;
+    text-align: center;
+    filter:alpha(opacity 0);
+    opacity: 0;
+    z-index: 2;
+ }
+ 

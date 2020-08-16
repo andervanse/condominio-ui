@@ -1,11 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
-.main-container {
-    min-height: 100vh; /* will cover the 100% of viewport */
-    overflow: hidden;
-    display: block;
+#container {
     position: relative;
-    padding-bottom: 100px; /* height of your footer */
+ }
+ 
+ #body {
+    padding:10px;
+    padding-bottom:20px;   /* Height of the footer */
+ }
+
+ #footer {
+    position: fixed;
+    bottom: 0;
+    width:100%;
+    height:20px; 
+    line-height: 20px;
+    background-color: rgba(73, 134, 65, 0.596);  
+ }
+ 
+.is-green {
+  background-color: rgba(73, 134, 65, 0.596);
+  color: white;
 }
 
 .footer {
@@ -24,18 +39,49 @@
     font-size: 20px;
 }
 
-@media only screen and (max-width: 1400px) {
-    .title {
-       font-size: 22px;
-    }
+p {
+    font-size: 16px;
+ }
+ 
+ .notification {
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+ }
+ 
+ .card-content {
+    padding: 0.5rem 0.5rem 1.2rem 0.5rem;
+ } 
 
-    .hero-body {
-        padding: 1.5rem 0.5rem;
-    }
+ 
+.img-post {
+   margin: auto;
+}
+
+@media only screen and (max-width: 568px) {
+    router-outlet ~ * {
+        width: 94%;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;      
+     }
  }
 
- @media only screen and (min-width: 1087px) {
+@media only screen and (min-width: 1020px) {
+     router-outlet ~ * {
+        width: 94%;
+        left: 0;
+        right: 0;     
+     }  
+
     .navbar-item {
         color: white;
     }
 }
+
+ 
+router-outlet ~ * {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto; 
+ }
+ 

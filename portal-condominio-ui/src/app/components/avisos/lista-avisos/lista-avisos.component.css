@@ -1,0 +1,5 @@
+
+
+.title:not(:last-child) {
+   padding: 1rem 1rem 1rem 1rem;
+}
