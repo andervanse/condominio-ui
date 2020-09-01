@@ -35,6 +35,7 @@ import { LoadingService } from './services/loading.service';
 import { EditarNegocioComponent } from './components/negocios/editar-negocio/editar-negocio.component';
 import { ListaNegociosComponent } from './components/negocios/lista-negocios/lista-negocios.component';
 import { NegocioService } from './services/negocio.service';
+import { ResizeImageService } from './services/resize-image.service';
 
 
 const appRoutes: Routes = [
@@ -98,7 +99,8 @@ const appRoutes: Routes = [
     AuthGuardService,
     AvisoService,
     NegocioService,
-    LoadingService
+    LoadingService,
+    ResizeImageService
   ],
   bootstrap: [AppComponent]
 })

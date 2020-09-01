@@ -27,7 +27,7 @@ module.exports = {
     //delegate: { putFileParams: (file, params) => Promise.resolve(params) },
     //ignores: (file) => file.Key.endsWith('.zip'),
     //ignorePatterns: ['*.zip'],
-    root: 's3://condominio-ilhas-do-caribe'
+    root: 's3://portal-condominio'
   },
 
   // Config file schema (always 2)

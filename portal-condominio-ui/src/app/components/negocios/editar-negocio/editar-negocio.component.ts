@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { NegocioService } from 'src/app/services/negocio.service';
 import { isNullOrUndefined } from 'util';
 import { fadeInOutAnimation } from 'src/app/services/animation';
+import { ResizeImageService } from 'src/app/services/resize-image.service';
 
 @Component({
   selector: 'app-editar-negocio',
@@ -19,19 +20,21 @@ export class EditarNegocioComponent implements OnInit {
   negocioId: number;
   negocio: Negocio;
   mensagemErro: string;
+  tipo: string;
   loading: boolean;
   uploadedFile: any;
   imagemUpload: any;
   tipos: any = ['Servico', 'Oportunidade']
 
-  @ViewChild('avisoForm') postagemForm: FormGroup;
+  @ViewChild('negocioForm') form: FormGroup;
   @ViewChild('btnSalvar') btnSalvar: ElementRef;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private negocioService: NegocioService) { }
+    private negocioService: NegocioService,
+    private resizeImageService: ResizeImageService) { }
 
     ngOnInit() {
       this.mensagemErro = '';
@@ -74,94 +77,100 @@ export class EditarNegocioComponent implements OnInit {
       });
     }
 
+    private novoNegocio(usuarioId: number) :Negocio {
+      let negocio = new Negocio();
+      negocio.id = null;
+      negocio.usuarioId = usuarioId;
+      negocio.ordem = null;
+      negocio.urlImagem = [];
+      return negocio;
+    } 
+
     private setFormFields() {
 
       if (isNullOrUndefined(this.negocio)) {
-        this.negocio = this.negocioService.novaPostagem(this.usuarioId);
+        this.negocio = this.novoNegocio(this.usuarioId);
       }
   
       if (this.negocio) {
-        if (this.negocio.urlsImagem)
-          this.imagemUpload = this.negocio.urlsImagem[0];
+        if (this.negocio.urlImagem)
+          this.imagemUpload = this.negocio.urlImagem[0];
       }
   
-      if (!isNullOrUndefined(this.postagemForm)) {
-        this.postagemForm.setValue({
+      if (!isNullOrUndefined(this.form)) {
+        this.form.setValue({
           id: this.negocio.id || 0,
           usuarioId: this.negocio.usuarioId || '',
           ordem: this.negocio.ordem || '',
           titulo: this.negocio.titulo || '',
           texto: this.negocio.texto || '',
-          tipo: this.negocio.tipo || ''
+          tipo: this.tipos[this.negocio.tipo]
         });
       } 
     }
 
-    changeTipo(e) {
-      this.postagemForm.controls['tipo'].setValue(e.target.value, {
-        onlySelf: true
-      })
-    }
 
     onNotificationClick() {
       this.mensagemErro = '';
     }
 
     onSubmit() {
-      if (this.postagemForm.valid) {
+      if (this.form.valid) {
   
         this.btnSalvar.nativeElement.classList.add('is-loading');
-        this.negocio.id = this.postagemForm.value.id || 0;
+        this.negocio.id = this.form.value.id || 0;
         this.negocio.usuarioId = this.usuarioId;
-        this.negocio.ordem = this.postagemForm.value.ordem;
-        this.negocio.titulo = this.postagemForm.value.titulo;
-        this.negocio.texto = this.postagemForm.value.texto;
+        this.negocio.ordem = this.form.value.ordem;
+        this.negocio.titulo = this.form.value.titulo;
+        this.negocio.texto = this.form.value.texto;
+        this.negocio.tipo = this.tipos.findIndex(t => t == this.form.value.tipo);
         this.loading = true;
   
         if (this.uploadedFile) {
-          const formData = new FormData();
-          formData.append('image', this.uploadedFile);
-          this.negocioService.uploadImagem(formData).subscribe((resp) => {
-            this.negocio.urlsImagem.push(resp.urlLocation);
+            const formData = new FormData();
+            formData.append('image', this.uploadedFile);
+            this.negocioService.uploadImagem(formData).subscribe((resp) => {
+            this.negocio.urlImagem = []
+            this.negocio.urlImagem.push(resp.urlLocation);
   
-            this.salvarAviso(this.negocio);
-            this.btnSalvar.nativeElement.classList.remove('is-loading');
-            this.loading = false;
-          }, (error) => {
-            this.loading = false;
-            console.error(error.message);
-            this.mensagemErro = error.message;
-            this.btnSalvar.nativeElement.classList.remove('is-loading');
-          });
+            this.salvarNegocio(this.negocio);
+               this.btnSalvar.nativeElement.classList.remove('is-loading');
+               this.loading = false;
+            }, (error) => {
+               this.loading = false;
+               console.error(error.message);
+               this.mensagemErro = error.message;
+               this.btnSalvar.nativeElement.classList.remove('is-loading');
+            });
         } else {
-          this.salvarAviso(this.negocio);
+          this.salvarNegocio(this.negocio);
           this.btnSalvar.nativeElement.classList.remove('is-loading');
         }
       }
     } 
     
   imageUpload(e) {
-    if (e.target.files[0]) {
-      let reader = new FileReader();
+
+    if (e.target.files[0]) {      
       this.uploadedFile = e.target.files[0];
-  
-      reader.onloadend = () => {
-        this.imagemUpload = reader.result;
-      }
-  
-      reader.readAsDataURL(this.uploadedFile);
+
+      this.resizeImageService
+          .resize( { maxSize: 512, file: this.uploadedFile } )
+          .then((result) => {
+            this.imagemUpload = result;
+          });
     }
   }
 
   apagarImagem() {
     this.imagemUpload = null;
-    this.negocio.urlsImagem[0] = null;
+    this.negocio.urlImagem[0] = null;
   }
     
-  private salvarAviso(negocio: Negocio) {
+  private salvarNegocio(negocio: Negocio) {
     this.negocioService.salvarNegocio(negocio).subscribe((resp) => {
       this.mensagemErro = '';
-      this.router.navigate(['../home']);
+      this.router.navigate(['../negocios']);
       this.loading = false;
     }, (resp) => {
       this.loading = false;

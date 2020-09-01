@@ -12,7 +12,6 @@ import { AuthService } from 'src/app/services/auth.service';
   animations: [fadeInOutAnimation]
 })
 export class ListaAvisosComponent implements OnInit {
-
   loading: boolean;
   avisos: Aviso[];
   avisoIdSelecionado: number;
@@ -20,7 +19,7 @@ export class ListaAvisosComponent implements OnInit {
   
   constructor(
     private avisoService: AvisoService,    
-    private authService :AuthService) { }
+    private authService: AuthService) { }
   
   ngOnInit() {
     this.loading = true;   

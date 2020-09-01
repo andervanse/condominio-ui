@@ -16,8 +16,8 @@
               </h4>
             </div>
 
-            <p class="title">Novo Aviso</p>
-            <form #avisoForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+            <p class="title">Novo Negócio</p>
+            <form #negocioForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
               <input type="hidden" name="id" ngModel>
               <input type="hidden" name="usuarioId" ngModel>
 
@@ -33,7 +33,7 @@
                 <label for="tipo">Tipo</label>
                 <div class="control">
                   <div class="select">
-                    <select id="tipo" name="tipo" (change)="changeTipo($event)" ngModel required>
+                    <select id="tipo" name="tipo" ngModel required>
                       <option value="">Selecione</option>
                       <option *ngFor="let tipo of tipos" [ngValue]="tipo">{{tipo}}</option>
                     </select>
@@ -76,7 +76,7 @@
                   </figure>
                 </div>
               </div>
-              <div *ngIf="aviso?.urlImagens?.length > 0" class="is-pulled-right">
+              <div *ngIf="negocio?.urlImagem" class="is-pulled-right">
                 <a type="button" class="button is-danger fas fa-times" (click)="apagarImagem()"></a>
               </div>
 
@@ -86,7 +86,7 @@
                 <a type="button" class="button is-danger" [routerLink]="['../../../home']">Voltar</a>
                 &nbsp;
                 <button type="submit" class="button is-info" #btnSalvar
-                  [disabled]="!avisoForm.form.valid">Salvar</button>
+                  [disabled]="!negocioForm.form.valid">Salvar</button>
               </div>
             </form>
           </div>

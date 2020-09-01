@@ -1,7 +1,7 @@
 
 export class Negocio {
     constructor() {
-        this.urlsImagem = []
+        this.urlImagem = []
     }
     
     id: number;
@@ -9,7 +9,7 @@ export class Negocio {
     titulo: string;
     texto: string;
     dtCriacao: string;
-    urlsImagem: string[];
+    urlImagem: string[];
     ordem: number;
     tipo: string;
 }

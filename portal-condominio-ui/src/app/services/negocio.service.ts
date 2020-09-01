@@ -13,16 +13,7 @@ export class NegocioService {
   negocios: Negocio[] = [];
 
   constructor(
-      private http: HttpClient) { }  
-
-  novaPostagem(usuarioId: number) :Negocio {
-      let negocio = new Negocio();
-      negocio.id = null;
-      negocio.usuarioId = usuarioId;
-      negocio.ordem = null;
-      negocio.urlImagem = null;
-      return negocio;
-  }    
+      private http: HttpClient) { }   
 
   obterNegocio(NegocioId: number): Observable<Negocio> {
       if (isNullOrUndefined(this.negocio) || this.negocio.id !== NegocioId) {
@@ -58,22 +49,22 @@ export class NegocioService {
           );
   }
   
-  salvarNegocio(Negocio: Negocio): Observable<any> {
-      return this.http.post(`${environment.apiBaseUrl}/api/negocios`, Negocio)
+  salvarNegocio(negocio: Negocio): Observable<any> {
+      return this.http.post(`${environment.apiBaseUrl}/api/negocios`, negocio)
           .pipe(
               map((resp) => {
-                  this.negocios.push(Negocio);
+                  this.negocios.push(negocio);
                   return this.negocios;
               })
           );
   }
 
-  excluirNegocio(NegocioId: number): Observable<any> {
+  excluirNegocio(negocioId: number): Observable<any> {
       this.negocio = null;
-      return this.http.delete(`${environment.apiBaseUrl}/api/negocios/${NegocioId}`)
+      return this.http.delete(`${environment.apiBaseUrl}/api/negocios/${negocioId}`)
           .pipe(
               map((resp) => {
-                  let idx = this.negocios.findIndex(a => { return a.id == NegocioId });
+                  let idx = this.negocios.findIndex(a => { return a.id == negocioId });
                   this.negocios.splice(idx, 1);
                   return this.negocios;
               })

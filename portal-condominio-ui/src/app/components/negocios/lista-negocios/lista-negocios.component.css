@@ -1,0 +1,10 @@
+
+.tile.inline-table {
+    display: inline-table;
+}
+
+@media screen and (max-width: 768px) {
+.media-content {
+    overflow-x: visible; 
+}
+}

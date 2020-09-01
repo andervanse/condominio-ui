@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: "http://localhost:4200",
-  apiBaseUrl: "https://localhost:5001"
+  baseUrl: "http://portal-condominio.s3-website-sa-east-1.amazonaws.com",
+  apiBaseUrl: "https://r6aul9s2u4.execute-api.sa-east-1.amazonaws.com/Prod"
 };

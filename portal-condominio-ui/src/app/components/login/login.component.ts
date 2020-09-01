@@ -2,11 +2,13 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginCredentials } from 'src/app/models/login-credentials.model';
+import { fadeInOutAnimation } from 'src/app/services/animation';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [fadeInOutAnimation]
 })
 export class LoginComponent implements OnInit {
 

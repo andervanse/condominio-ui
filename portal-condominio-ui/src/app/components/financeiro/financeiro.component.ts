@@ -55,8 +55,6 @@ export class FinanceiroComponent implements OnInit {
       return valueA - valueB;
     });
 
-    console.log(sortedList);
-
     let periodos = sortedList.map(x => {
       let dtAtual = new Date(x.data)
       let idxMonth = dtAtual.getMonth();

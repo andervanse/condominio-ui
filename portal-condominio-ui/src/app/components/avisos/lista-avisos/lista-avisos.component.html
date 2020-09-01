@@ -11,7 +11,9 @@
       </nav>
       <br>
       <div class="tile is-child box" *ngFor="let aviso of avisos">
-        <br>
+        <p class="title has-text-centered">
+          {{ aviso.titulo }}
+        </p>
         <article class="media">
           <div class="media-content">
             <div class="content">
@@ -20,17 +22,14 @@
                   <img [src]="aviso.urlImagem" />
                 </figure>
               </div>
-              <br>
-              <span class="tag is-dark">{{ aviso.dataCriacao | date:'dd/MM/yyyy' }}</span>
-              <p class="title">
-                {{ aviso.titulo }}
-              </p>
+              <br>              
+              <p *ngIf="isAdmin()" class="tag is-dark">{{ aviso.dataCriacao | date:'dd/MM/yyyy' }}</p>
               <p class="subtitle">
                 {{ aviso.texto }}
               </p>
             </div>
-            <hr>
             <nav *ngIf="isAdmin()" class="level level-left">
+              <hr>
               <br>
               <a class="button is-info" [routerLink]="['../avisos', 'editar', aviso.id]">Editar</a>
               &nbsp;&nbsp;&nbsp;&nbsp;

@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { isNullOrUndefined } from 'util';
 import { AvisoService } from 'src/app/services/aviso.service';
 import { fadeInOutAnimation } from 'src/app/services/animation';
+import { ResizeImageService } from 'src/app/services/resize-image.service';
 
 @Component({
   selector: 'app-editar-aviso',
@@ -29,7 +30,8 @@ export class EditarAvisoComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private avisoService: AvisoService) { }
+    private avisoService: AvisoService,
+    private resizeImageService: ResizeImageService) { }
 
     ngOnInit() {
       this.mensagemErro = '';
@@ -134,14 +136,13 @@ export class EditarAvisoComponent implements OnInit {
     
   imageUpload(e) {
     if (e.target.files[0]) {
-      let reader = new FileReader();
       this.uploadedFile = e.target.files[0];
   
-      reader.onloadend = () => {
-        this.imagemUpload = reader.result;
-      }
-  
-      reader.readAsDataURL(this.uploadedFile);
+      this.resizeImageService
+          .resize( { maxSize: 512, file: this.uploadedFile } )
+          .then((result) => {
+            this.imagemUpload = result;
+          });
     }
   }
 

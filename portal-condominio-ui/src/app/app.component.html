@@ -1,6 +1,8 @@
 <div class="main-container">
-<app-menu></app-menu>
+  <app-menu></app-menu>
 
-  <router-outlet></router-outlet>
+  <div [@routeAnimations]="prepareRoute(o)">
+    <router-outlet #o="outlet"></router-outlet>     
+  </div>
 
 </div>
